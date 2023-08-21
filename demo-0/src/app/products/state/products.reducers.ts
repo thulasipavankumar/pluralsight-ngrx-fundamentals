@@ -1,4 +1,5 @@
 import { createAction, createReducer,on } from "@ngrx/store";
+import { ProductsPageActions } from "./products.actions";
 
 export interface ProductsState{
     showProductCode:boolean;
@@ -8,7 +9,7 @@ const initialState: ProductsState ={
 }
 export const productsReducer = createReducer(
     initialState,
-    on(createAction('[Prodcuts Page] Toggle Show Procut Code'),(state)=>({
+    on(ProductsPageActions.toggleShowProcutCode,(state)=>({
         ...state,
         showProductCode:!state.showProductCode,
 
