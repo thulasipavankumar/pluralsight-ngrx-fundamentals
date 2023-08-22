@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProductsAPIActions, ProductsPageActions } from "./products.actions";
 import { map,concatMap, catchError,of, exhaustMap, mergeMap,tap } from "rxjs";
 import { Router } from "@angular/router";
+import { UPDATE } from "@ngrx/store";
 
 
 
@@ -49,7 +50,7 @@ export class ProductEffects {
             concatMap(({product}) =>
                 this.productsService.update(product).pipe(
                         map(() =>
-                            ProductsAPIActions.productsUpdateSuccess({ product })
+                            ProductsAPIActions.productsUpdateSuccess({ update:{id:product.id,changes:product} })
                         ),
                         catchError(
                             (error)=>of(ProductsAPIActions.productsUpdateFail({message:error}))
