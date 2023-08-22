@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { sumProducts } from 'src/app/utils/sum-products';
 import { Store } from '@ngrx/store';
-import { ProductsAPIActions, ProductsPageActions } from '../state/products.actions';
+import {  ProductsPageActions } from '../state/products.actions';
 import { selectProducts, selectProductsLoading, selectProductsTotal,selectProductsShowProductCode, selectProductsErrorMessage } from '../state/products.selectors';
 
 @Component({
@@ -17,7 +16,7 @@ export class ProductsPageComponent {
   errorMessage$ = this.store.select(selectProductsErrorMessage)
 
   constructor( private store: Store) {
-    this.store.subscribe(store => console.log(store))
+    
   }
 
   ngOnInit() {
