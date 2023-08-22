@@ -1,14 +1,6 @@
 import { createAction,createActionGroup,emptyProps,props } from "@ngrx/store"
 import { Product } from "../product.model";
 
-// export const loadProducts = createAction('[Prodcuts Page] Load Products')
-// export const toggleProducts = createAction('[Prodcuts Page] Toggle Show Procut Code')
-
-// export const productsLoadedSuccess = createAction('[Prodcuts API] Products Loaded Success',
-// props<{ products: Product[] }>);
-
-// export const productsLoadedFail = createAction('[Prodcuts API] Products Loaded Fail',
-// props<{ message: string }>);
 
 export const ProductsPageActions = createActionGroup({
     source:'Products Page',

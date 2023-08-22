@@ -5,7 +5,7 @@ import { sumProducts } from "src/app/utils/sum-products";
 export const selectProductsState = createFeatureSelector<ProductsState>('products')
 export const selectProducts = createSelector(
     selectProductsState,
-    (productsstate) => productsstate.products
+    (productsState) => productsState.products
 )
 export const selectProductsLoading = createSelector(
     selectProductsState,
@@ -21,5 +21,10 @@ export const selectProductsShowProductCode = createSelector(
 export const selectProductsTotal = createSelector(
     selectProducts,
     (products) => sumProducts(products)
+)
+
+export const selectProductsErrorMessage = createSelector(
+    selectProductsState,
+    (productsState) => productsState.errorMessage
 )
 
