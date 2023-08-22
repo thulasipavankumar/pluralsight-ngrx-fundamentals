@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { ProductsService } from "../products.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProductsAPIActions, ProductsPageActions } from "./products.actions";
-import { map,concatMap, catchError,of, exhaustMap, mergeMap } from "rxjs";
+import { map,concatMap, catchError,of, exhaustMap, mergeMap,tap } from "rxjs";
+import { Router } from "@angular/router";
 
 
 
@@ -11,8 +12,7 @@ export class ProductEffects {
     ngrxOnInitEffects(){
         return ProductsPageActions.loadProducts();
     }
-    constructor(private actions$: Actions,
-        private productsService: ProductsService) { }
+    
     loadProducts$ = createEffect(() =>
         this.actions$.pipe(
             ofType(ProductsPageActions.loadProducts),
@@ -71,5 +71,18 @@ export class ProductEffects {
                     )
             ))
     );
-
+    redirectToProductsPage = createEffect(
+        ()=>this.actions$.pipe(
+            ofType(
+                ProductsAPIActions.productsAddedSuccess,
+                ProductsAPIActions.productsDeleteSuccess,
+                ProductsAPIActions.productsUpdateSuccess,
+            ),
+            tap(()=>this.router.navigate(['/products']))
+        ),
+        {dispatch:false}
+    )
+    constructor(private actions$: Actions,
+        private productsService: ProductsService,
+        private router:Router) { }
 }
