@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {  ProductsPageActions } from '../state/products.actions';
-import { selectProducts, selectProductsLoading, selectProductsTotal,selectProductsShowProductCode, selectProductsErrorMessage } from '../state/products.selectors';
+import { ProductsPageActions } from '../state/products.actions';
+import {
+  selectProducts,
+  selectProductsErrorMessage,
+  selectProductsLoading,
+  selectProductsShowProductCode,
+  selectProductsTotal,
+} from '../state/products.selectors';
 
 @Component({
   selector: 'app-products-page',
@@ -10,16 +16,14 @@ import { selectProducts, selectProductsLoading, selectProductsTotal,selectProduc
 })
 export class ProductsPageComponent {
   products$ = this.store.select(selectProducts);
-  total$ =this.store.select(selectProductsTotal);
-  loading$ = this.store.select(selectProductsLoading)
+  total$ = this.store.select(selectProductsTotal);
   showProductCode$ = this.store.select(selectProductsShowProductCode);
-  errorMessage$ = this.store.select(selectProductsErrorMessage)
+  loading$ = this.store.select(selectProductsLoading);
+  errorMessage$ = this.store.select(selectProductsErrorMessage);
 
-  constructor( private store: Store) {
-    
-  }
+  constructor(private store: Store) {}
 
   toggleShowProductCode() {
-    this.store.dispatch(ProductsPageActions.toggleShowProcutCode())
+    this.store.dispatch(ProductsPageActions.toggleShowProductCode());
   }
 }

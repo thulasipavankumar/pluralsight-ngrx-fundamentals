@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from '../product.model';
-import { ProductsService } from '../products.service';
 import { Store } from '@ngrx/store';
-import { selectProductsById, selectProductsLoading } from '../state/products.selectors';
+import { Product } from '../product.model';
 import { ProductsPageActions } from '../state/products.actions';
+import {
+  selectProductById,
+  selectProductsErrorMessage,
+  selectProductsLoading,
+} from '../state/products.selectors';
 
 @Component({
   selector: 'app-product-page',
@@ -12,25 +14,21 @@ import { ProductsPageActions } from '../state/products.actions';
   styleUrls: ['./product-page.component.css'],
 })
 export class ProductPageComponent {
-  product$ = this.store.select(selectProductsById)
-  loading$ = this.store.select(selectProductsLoading)
+  product$ = this.store.select(selectProductById);
+  loading$ = this.store.select(selectProductsLoading);
+  errorMessage$ = this.store.select(selectProductsErrorMessage);
 
-  constructor(
-    private store:Store
-  ) {}
-
-  
+  constructor(private store: Store) {}
 
   addProduct(product: Product) {
-    this.store.dispatch(ProductsPageActions.addProduct({product}))
+    this.store.dispatch(ProductsPageActions.addProduct({ product }));
   }
 
   updateProduct(product: Product) {
-    this.store.dispatch(ProductsPageActions.updateProduct({product}))
+    this.store.dispatch(ProductsPageActions.updateProduct({ product }));
   }
 
   deleteProduct(id: number) {
-    this.store.dispatch(ProductsPageActions.deleteProduct({id}))
+    this.store.dispatch(ProductsPageActions.deleteProduct({ id }));
   }
-
 }
